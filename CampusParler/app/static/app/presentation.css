@@ -1,0 +1,222 @@
+/* =======================
+   PAGE PRESENTATION
+   ======================= */
+   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=HK+Modular&display=swap');
+   
+   html,body {
+       height: 100%;               /* Le body prend toute la hauteur de l'écran */
+       margin: 0;                  /* Supprime l'espace blanc par défaut autour de la page */
+       padding: 0;                  /* Supprime l'espace interne par défaut (à l'intérieur du body) */
+       display: flex;              /* Active Flexbox */
+       flex-direction: column;     /* Empile les éléments verticalement */
+       background-color: #d0ecfa;
+       color: black;             /* Couleur du texte par défaut (gris foncé) */
+       text-align: center;         /* Centre le texte par défaut horizontalement */
+   }
+   
+   .content {
+       flex: 1;               /* Le contenu principal prend tout l'espace disponible */
+       padding: 20px;         /* Un peu d'espace autour du contenu */
+   }
+
+   
+   /* En-tête (header) */
+   header {
+       background-color: #52B5E5;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       padding: 15px;
+       gap: 15px;
+       position: relative;
+   }
+   
+   .decorative-band {
+       margin: 0;
+       padding: 0;
+   }
+   
+   .decorative-band img {
+       width: 100%;        /* L'image couvre toute la largeur de l'écran */
+       height: auto;       /* Maintient les proportions */
+       display: block;     /* Évite les espaces blancs en dessous de l'image */
+       margin: 0;          /* Supprime les marges */
+       padding: 0;         /* Supprime les paddings */
+   }
+   
+   
+   /* Style pour le titre principal */
+   h1.glitch {
+       font-family: 'Bungee', sans-serif;  /* Police pour "Campus Parler" */
+       font-size: 70px;
+       color: #1C2668;
+       text-shadow: 
+           -3px 3px 0 #ff00a8,      /* Ombre rose en bas à gauche */
+           3px -3px 0 #50efff;      /* Ombre bleue en haut à droite */
+       margin: 5px;
+       text-transform: uppercase; 
+   }
+   
+   /* Style pour le slogan "DÉBATEZ !" */
+   .slogan {
+       font-family: 'HK Modular', sans-serif; /* Police pour "DÉBATEZ !" */
+       font-size: 50px;
+       color: White;
+       text-shadow: 
+           -3px 3px 0 #ff00a8,      
+           3px -3px 0 #50efff;      
+       margin: 5px 0 25px 0; 
+       letter-spacing: 2px;
+       text-transform: uppercase; 
+   }
+   nav ul {
+       list-style: none;
+       display: flex;
+       gap: 150px;
+       padding: 0;
+       margin: 0;
+   }
+   
+   nav a {
+       background: #1C2668; 
+       color: white; 
+       padding: 15px 20px; 
+       border-radius: 50px; 
+       text-decoration: none; 
+       font-size: 15px; 
+       font-weight: bold; 
+       font-family: 'Open Sans', sans-serif; 
+       box-shadow: 
+           -3px 3px 0px 0px #ff00a8, 
+           3px -3px 0px 0px #50efff;  
+       transition: transform 0.3s; 
+       display: inline-block; 
+   }
+   
+   nav a:hover {
+       transform: scale(1.1); /* Agrandit légèrement le bouton quand on passe la souris dessus. */
+   }
+   
+   
+   
+   .login button {
+       background-color: white;
+       color: #1C2668;
+       padding: 15px 20px;
+       border-radius: 50px;
+       border: none;
+       cursor: pointer;
+       font-size: 15px;
+       font-weight: bold;
+       font-family: 'Open Sans', sans-serif;
+       box-shadow: 
+           -3px 3px 0px 0px #ff00a8,
+           3px -3px 0px 0px #50efff;
+       transition: transform 0.3s;
+       position: absolute;
+       top: 80px;
+       right: 50px;
+   }
+   
+   .login button:hover {
+       transform: scale(1.1);
+       background-color: white;
+   }
+   
+   /* Section Présentation */
+   .presentation {
+       background-color: #d0ecfa;
+       margin: 0;
+       padding: 0;
+       display: flex;
+       align-items: left;
+       justify-content: left;
+       gap: 15px;
+   
+   }
+   
+   .presentation .icon img {
+       height: 50px;
+       padding:10px;
+       margin-top: 20px;
+   }
+   
+   .presentation h2  {
+       font-family: 'Bungee', sans-serif;
+       font-size: 35px;             
+       color: #1C2668;                
+       text-shadow: 
+           -1px 0px 0 #ff00a8,      
+           0px 2px 0 #50efff;      
+       font-weight: 150;           
+       text-align: left;          
+       margin-top: 45px;
+   } 
+   .video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.video-container video {
+    width: 80%;
+    max-width: 800px;
+    border-radius: 15px;
+}
+   /* Pied de page */
+    footer {
+        font-family: 'Open Sans', sans-serif;
+        background-color: #1C2668;
+        color: white;
+        padding: 3px;
+        margin-top: auto;
+        width: 100%;
+        font-size: 12px;
+        text-align: center; 
+    }
+   
+   /* Styles pour les messages */
+   .messages {
+       width: 80%;
+       max-width: 600px;
+       margin: 10px auto;
+       text-align: center;
+   }
+   
+   .message {
+       padding: 10px;
+       margin-bottom: 10px;
+       border-radius: 5px;
+       font-weight: bold;
+   }
+   
+   .error {
+       background-color: #ffdddd;
+       color: #a94442;
+       border: 1px solid #f5c6cb;
+   }
+   
+   .success {
+       background-color: #d4edda;
+       color: #155724;
+       border: 1px solid #c3e6cb;
+   }
+   
+   .info {
+       background-color: #d1ecf1;
+       color: #0c5460;
+       border: 1px solid #bee5eb;
+   }
+   
+   /* Style pour le message de bienvenue */
+   .welcome-message {
+       margin-right: 10px;
+       color: #fff;
+       font-weight: bold;
+       text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+   }
+   
+   

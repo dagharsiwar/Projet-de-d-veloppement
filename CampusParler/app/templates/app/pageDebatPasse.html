@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Débats finis</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/pageDebat.css' %}"/>
+</head>
+
+
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <div class="top-bar">
+        </div>
+        <!-- Menu de navigation -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'debats_en_cours' %}">Débats en cours</a></li>
+                <li><a href="{% url 'debats_finis' %}">Débats finis</a></li>
+                <li><a href="{% url 'create_debat' %}">Créer mon débat</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Bande décorative -->
+    <div class="decorative-band">
+        <img src="{% static 'app/images/header.png' %}" alt="Bande décorative">
+    </div>
+
+    <!-- Titre dynamique -->
+    <section class="titre">
+        <h1 id="debat-title" class="glitch">{{debat.titre}}</h1>
+        <div class="Question">
+            <p id="debat-content">{{debat.description}}</p>
+        </div>
+    </section>
+
+    <!-- Affichage du score du débat -->
+    <div class="barre-container">
+        <span class="label-gauche">Pour<br>{{score_debat}}%</span>
+        <div class="barre">
+            <div class="remplie" style="width: {{score_debat}}%;"></div>
+        </div>
+        <span class="label-droite">Contre<br>{{score_inverse}}%</span> <!-- Correspond au score côté Contre -->
+    </div>
+
+    <!-- Corps du débat -->
+    <div class="content">
+
+        <div class="arguments-pour">
+            <h2>Arguments Pour</h2>
+            <ul>
+            <!-- Liste des arguments pour -->
+            {% for arg_pour in liste_arg_pour %}
+                <li class="argument pour">
+                    <p>Par : {{ arg_pour.auteur_argument.username }}</p>
+                    <h3>{{ arg_pour.titre_argument }}</h3>
+                    <p id="corps">{{ arg_pour.contenu_argument }}</p>
+                    <p id="score">Score : {{ arg_pour.score_argument }}</p>
+                    
+                    <!-- Liste des réponses à l'argument -->
+                    <ul>
+                    {% for rep_pour in liste_rep %}
+                        {% if rep_pour.argument_id.pk == arg_pour.pk %}
+                        <li class="{% if rep_pour.position_reponse %}reponse pour{% else %}reponse contre{% endif %}">
+                            <p id="auteur"> Réponse de : {{ rep_pour.auteur_reponse }}</p>
+                            <p id="corps"> {{ rep_pour.contenu_reponse }}</p>
+                            <p id="score"> Score : {{ rep_pour.score_reponse }}</p>
+                        </li>
+                        {% endif %}                    
+                    {% endfor %}
+                    </ul>
+                </li>
+            {% empty %}
+                <p>Aucun argument pour.</p>
+            {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="arguments-contre">
+            <h2>Arguments Contre</h2>
+            <ul>
+                <!-- Liste des arguments contre -->
+                {% for arg_contre in liste_arg_contre %}
+                <li class="argument contre">
+                    <p>Par : {{ arg_contre.auteur_argument.username }}</p>
+                    <h3>{{ arg_contre.titre_argument }}</h3>
+                    <p id="corps">{{ arg_contre.contenu_argument }}</p>
+                    <p id="score">Score : {{ arg_contre.score_argument }}</p>
+
+                    
+                    <!-- Liste des réponses à l'argument -->
+                    <ul>
+                    {% for rep_contre in liste_rep %}
+                        {% if rep_contre.argument_id.pk == arg_contre.pk %}
+                        <li class="{% if rep_contre.position_reponse %}reponse pour{% else %}reponse contre{% endif %}">
+                            <p id="auteur"> Réponse de : {{ rep_contre.auteur_reponse }}</p>
+                            <p id="corps"> {{ rep_contre.contenu_reponse }}</p>
+                            <p id="score"> Score : {{ rep_contre.score_reponse }}</p>
+                        </li>
+                        {% endif %}                 
+                    {% endfor %}
+                    </ul>         
+                </li>
+            {% empty %}
+                <p>Aucun argument contre.</p>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>

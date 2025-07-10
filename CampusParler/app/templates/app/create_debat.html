@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Parler - Créer un débat</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/create_debat.css' %}">
+    <link rel="stylesheet" href="{% static 'app/popup_messages.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <!-- Menu de navigation en dessous du slogan -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'debats_en_cours' %}">Débats en cours</a></li>
+                <li><a href="{% url 'debats_finis' %}">Débats finis</a></li>
+                <li><a href="{% url 'create_debat' %}">Créer mon débat</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    {% include 'app/messages_popup.html' %}
+            
+    <!-- Bande décorative -->
+    <div class="decorative-band">
+        <img src="{% static 'app/images/header.png' %}" alt="Bande décorative">
+    </div>
+    <!-- Section Accueil -->
+    <section class="presentation" id="presentation">
+        <div class="icon">
+            <img src="{% static 'app/images/pacman.png' %}" alt="Pacman Icon" />
+        </div>
+        <h2>CRÉER UN DÉBAT</h2>
+    </section>
+    <div class="content">
+        <!-- Formulaire de création de débat -->
+        <div class="carre">
+            <form action="{% url 'create_debat' %}" method="POST">
+                {% csrf_token %}
+                <div class="débat">
+                    <input type="text" name="titre" class="zone-texte" placeholder="Titre du débat..." required>
+                    <textarea name="description" class="zone-texte2" placeholder="Description..." required></textarea>
+                </div>
+            
+                <input type="hidden" name="type_debat" id="type_debat" value="ouvert">
+                <button type="submit" class="start-btn">Créer le débat</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function setType(type) {
+            document.getElementById('type_debat').value = type;
+        }
+    </script>
+</body>
+</html>
+

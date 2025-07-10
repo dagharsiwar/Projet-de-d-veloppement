@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Parler - Débats En Cours</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/debats_en_cours.css' %}">
+    <link rel="stylesheet" href="{% static 'app/popup_messages.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <div class="top-bar">
+
+        </div>
+        <!-- Menu de navigation en dessous du slogan -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'debats_en_cours' %}">Débats en cours</a></li>
+                <li><a href="{% url 'debats_finis' %}">Débats finis</a></li>
+                <li><a href="{% url 'create_debat' %}">Créer mon débat</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    {% include 'app/messages_popup.html' %}
+            
+    <!-- Bande décorative -->
+    <div class="decorative-band">
+        <img src="{% static 'app/images/header.png' %}" alt="Bande décorative">
+    </div>
+    <!-- Section Accueil -->
+    <section class="presentation" id="presentation">
+        <div class="icon">
+            <img src="{% static 'app/images/pacman.png' %}" alt="Pacman Icon" />
+        </div>
+        <h2>DÉBATS EN COURS</h2>
+    </section>
+    <div class="content">
+        <!-- Liste des débats en cours -->
+        {% if debats %}
+        <ul style="list-style-type: none;" class="enligne">
+            {% for debat in debats %}
+                <li>
+                    <div class="vignette">
+                        <a href="debats_en_cours/{{ debat.id }}">{{debat.titre}}</a>
+                    </div>
+                </li>
+                
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>Aucun débat en cours.</p>
+        {% endif %}
+    </div>
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

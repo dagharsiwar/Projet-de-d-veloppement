@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Débat en Cours</title>
+    
+    <!-- Chargement des styles -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/pageDebat.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app/pageDebatKialo.css' %}"/>
+    <link rel="stylesheet" href="{% static 'app/popup_messages.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Affichage des messages (erreurs, confirmations, etc.) -->
+    {% include 'app/messages_popup.html' %}
+    
+    <!-- En-tête du site -->
+    <header>
+        <!-- Barre supérieure (pas utile pour l'insatn,t mais laisser la -->
+        <div class="top-bar">
+
+        </div>
+        
+        <!-- Menu de navigation -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'debats_en_cours' %}">Débats en cours</a></li>
+                <li><a href="{% url 'debats_finis' %}">Débats finis</a></li>
+                <li><a href="{% url 'create_debat' %}">Créer mon débat</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Bande décorative -->
+    <div class="decorative-band">
+        <img src="{% static 'app/images/header.png' %}" alt="Bande décorative">
+    </div>
+    
+    <!-- Titre du débat -->
+    <h1 id="debat-title" class="glitch">{{ debat.titre }}</h1>
+
+    <!-- Contenu principal du débat -->
+    {% if focus_argument.est_racine %}
+        <!-- Affichage de l'argument racine (description du débat) -->
+        <div class="Question">
+            <p id="debat-content">{{ focus_argument.contenu_argument }}</p>
+            <div class="argument-scores">
+                <span class="quad-score">Score: {{ focus_argument.quad_score|floatformat:2 }}</span>
+            </div>
+            <!-- Boutons pour voter sur l'argument racine -->
+            <div class="vote-actions">
+                <form method="post" action="{% url 'debat_details' debat.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="vote_type" value="like">
+                    <input type="hidden" name="element_id" value="{{ focus_argument.id }}">
+                    <button type="submit" class="vote-button like-button"></button>
+                </form>
+                <span class="vote-count">{{ focus_argument.score_argument }}</span>
+                <form method="post" action="{% url 'debat_details' debat.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="vote_type" value="dislike">
+                    <input type="hidden" name="element_id" value="{{ focus_argument.id }}">
+                    <button type="submit" class="vote-button dislike-button"></button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <!-- Vue hiérarchique avec tous les ancêtres et l'argument en focus -->
+        <div class="hierarchie-container">
+            <!-- Affichage de la racine si elle n'est pas déjà dans les ancêtres -->
+            {% if not ancestors or not ancestors.0.est_racine %}
+                <a href="{% url 'debat_details' debat.id %}" class="argument-parent-link">
+                    <div class="argument-parent racine">
+                        <div class="argument-content">
+                            <div class="argument-text">{{ racine.contenu_argument }}</div>
+                            <div class="argument-scores">
+                                <span class="quad-score">Score: {{ racine.quad_score|floatformat:2 }}</span>
+                            </div>
+                        </div>
+                        <div class="arrow-down"></div>
+                    </div>
+                </a>
+            {% endif %}
+            
+            <!-- Affichage de tous les ancêtres dans l'ordre -->
+            {% for ancestor in ancestors %}
+                <a href="{% url 'debat_details' debat.id %}?focus={{ ancestor.id }}" class="argument-parent-link">
+                    <div class="argument-parent {% if ancestor.relation == 1.0 %}pour{% elif ancestor.relation == -1.0 %}contre{% else %}racine{% endif %} {% if ancestor.est_racine %}racine{% endif %}">
+                        <div class="argument-content">
+                            <div class="argument-text">{{ ancestor.contenu_argument }}</div>
+                            <div class="argument-meta">
+                                <span class="auteur">{{ ancestor.auteur_argument.username }}</span>
+                                <div class="argument-scores">
+                                    <span class="quad-score">Score: {{ ancestor.quad_score|floatformat:2 }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="arrow-down"></div>
+                    </div>
+                </a>
+            {% endfor %}
+            
+            <!-- Affichage de l'argument en focus -->
+            <div class="argument-focus {% if focus_argument.relation == 1.0 %}pour{% elif focus_argument.relation == -1.0 %}contre{% else %}racine{% endif %}">
+                <div class="argument-content">
+                    <div class="argument-focus-header">
+                        <span class="focus-label">Argument en focus:</span>
+                    </div>
+                    <div class="argument-text">{{ focus_argument.contenu_argument }}</div>
+                    <div class="argument-meta">
+                        <span class="auteur">{{ focus_argument.auteur_argument.username }}</span>
+                        <div class="argument-scores">
+                            <span class="quad-score">Score: {{ focus_argument.quad_score|floatformat:2 }}</span>
+                        </div>
+                    </div>
+                    <!-- Boutons pour voter sur l'argument en focus -->
+                    <div class="vote-actions">
+                        <form method="post" action="{% url 'debat_details' debat.id %}?focus={{ focus_argument.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="vote_type" value="like">
+                            <input type="hidden" name="element_id" value="{{ focus_argument.id }}">
+                            <button type="submit" class="vote-button like-button"></button>
+                        </form>
+                        <span class="vote-count">{{ focus_argument.score_argument }}</span>
+                        <form method="post" action="{% url 'debat_details' debat.id %}?focus={{ focus_argument.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="vote_type" value="dislike">
+                            <input type="hidden" name="element_id" value="{{ focus_argument.id }}">
+                            <button type="submit" class="vote-button dislike-button"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Statistiques du débat et lien vers le formulaire -->
+    <div class="debate-stats">
+        <span>{{ liste_arg_pour|length }} Pour</span>
+        <span>{{ liste_arg_contre|length }} Contre</span>
+    </div>
+
+    <!-- Conteneur des arguments pour et contre -->
+    <div class="arguments-container">
+        <!-- Colonne des arguments POUR -->
+        <div class="column-pour">
+            <h3>Arguments pour</h3>
+            {% for arg_pour in liste_arg_pour %}
+                <div class="argument pour" data-id="{{ arg_pour.id }}">
+                    <div class="argument-user">{{ arg_pour.auteur_argument.username }}</div>
+                    <div class="argument-content">
+                        <div class="argument-text">{{ arg_pour.contenu_argument }}</div>
+                        <div class="argument-scores">
+                            <span class="quad-score">Score: {{ arg_pour.quad_score|floatformat:2 }}</span>
+                        </div>
+                        <!-- Boutons pour voter -->
+                        <div class="vote-actions">
+                            <form method="post" action="{% url 'debat_details' debat.id %}{% if focus_argument.id %}?focus={{ focus_argument.id }}{% endif %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="vote_type" value="like">
+                                <input type="hidden" name="element_id" value="{{ arg_pour.id }}">
+                                <button type="submit" class="vote-button like-button"></button>
+                            </form>
+                            <span class="vote-count">{{ arg_pour.score_argument }}</span>
+                            <form method="post" action="{% url 'debat_details' debat.id %}{% if focus_argument.id %}?focus={{ focus_argument.id }}{% endif %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="vote_type" value="dislike">
+                                <input type="hidden" name="element_id" value="{{ arg_pour.id }}">
+                                <button type="submit" class="vote-button dislike-button"></button>
+                            </form>
+                        </div>
+                    </div>
+                    <a href="{% url 'debat_details' debat.id %}?focus={{ arg_pour.id }}" class="argument-link"></a>
+                </div>
+            {% empty %}
+                <div class="no-arguments">Aucun argument pour.</div>
+            {% endfor %}
+        </div>
+
+        <!-- Colonne des arguments CONTRE -->
+        <div class="column-contre">
+            <h3>Arguments contre</h3>
+            {% for arg_contre in liste_arg_contre %}
+                <div class="argument contre" data-id="{{ arg_contre.id }}">
+                    <div class="argument-user">{{ arg_contre.auteur_argument.username }}</div>
+                    <div class="argument-content">
+                        <div class="argument-text">{{ arg_contre.contenu_argument }}</div>
+                        <div class="argument-scores">
+                            <span class="quad-score">Score: {{ arg_contre.quad_score|floatformat:2 }}</span>
+                        </div>
+                        <!-- Boutons pour voter -->
+                        <div class="vote-actions">
+                            <form method="post" action="{% url 'debat_details' debat.id %}{% if focus_argument.id %}?focus={{ focus_argument.id }}{% endif %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="vote_type" value="like">
+                                <input type="hidden" name="element_id" value="{{ arg_contre.id }}">
+                                <button type="submit" class="vote-button like-button"></button>
+                            </form>
+                            <span class="vote-count">{{ arg_contre.score_argument }}</span>
+                            <form method="post" action="{% url 'debat_details' debat.id %}{% if focus_argument.id %}?focus={{ focus_argument.id }}{% endif %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="vote_type" value="dislike">
+                                <input type="hidden" name="element_id" value="{{ arg_contre.id }}">
+                                <button type="submit" class="vote-button dislike-button"></button>
+                            </form>
+                        </div>
+                    </div>
+                    <a href="{% url 'debat_details' debat.id %}?focus={{ arg_contre.id }}" class="argument-link"></a>
+                </div>
+            {% empty %}
+                <div class="no-arguments">Aucun argument contre.</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Section pour ajouter un nouvel argument -->
+    <div id="new-argument" class="new-argument-section">
+        <h2>Ajouter un nouvel argument en réponse à l'argument</h2>
+        <form method="post" action="{% url 'debat_details' debat.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="parent_id" value="{{ focus_argument.id }}">
+            
+            <!-- Choix de la relation (pour/contre) -->
+            <div class="form-position">
+                <label>Relation :</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="relation" value="1.0" checked>Pour</label>
+                    <label><input type="radio" name="relation" value="-1.0">Contre</label>
+                </div>
+            </div>
+            
+            <!-- Champ pour le contenu de l'argument -->
+            <div class="form-field">
+                <label>Contenu :</label>
+                <textarea name="contenu_argument" placeholder="Contenu de l'argument" required></textarea>
+            </div>
+            
+            <!-- Bouton de soumission -->
+            <button type="submit" class="submit-btn">Ajouter l'argument</button>
+        </form>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

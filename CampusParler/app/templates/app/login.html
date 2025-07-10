@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page d'identification</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'app/login.css' %}" />
+  <link rel="stylesheet" href="{% static 'app/popup_messages.css' %}" />
+</head>
+<body class="login-page">
+  <header>
+    <div class="header-content">
+      <a href="{% url 'index' %}" class="home-button">
+        <span class="icon">⌂</span>
+      </a>
+    </div>
+  </header>
+  <div class="header-bar"></div>
+  <div class="logo-container">
+    <img src="{% static 'app/images/logo.png' %}" alt="Logo" class="logo">
+  </div>
+  <div class="dino">
+    <img src="{% static 'app/images/dino.png' %}" alt="Dino" class="dino">
+  </div>
+  
+  {% include 'app/messages_popup.html' %}
+  
+  <div class="wrapper">
+    <div class="card-switch">
+      <label class="switch">
+        <input type="checkbox" class="toggle" id="form-toggle">
+        <span class="slider"></span>
+        <span class="card-side"></span>
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="title">Se Connecter</div>
+            <form class="flip-card__form" action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              <input class="flip-card__input" name="username" placeholder="Nom d'utilisateur" type="text" required>
+              <input class="flip-card__input" name="password" placeholder="Mot de passe" type="password" required>
+              <button class="flip-card__btn" type="submit">Connexion</button>
+            </form>
+          </div>
+          <div class="flip-card__back">
+            <div class="title">S'inscrire</div>
+            <form class="flip-card__form" action="{% url 'register' %}" method="post">
+              {% csrf_token %}
+              <input class="flip-card__input" name="username" placeholder="Nom d'utilisateur" type="text" required>
+              <input class="flip-card__input" name="password" placeholder="Mot de passe" type="password" required>
+              <button class="flip-card__btn" type="submit">Let's go</button>
+            </form>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+  <!-- Pied de page -->
+  <footer>
+    <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+</footer>
+</body>
+</html>

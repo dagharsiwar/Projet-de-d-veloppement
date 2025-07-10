@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Parler - Créer un débat standard</title>
+    
+    <!-- Chargement des styles -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/create_debat.css' %}">
+    <link rel="stylesheet" href="{% static 'app/popup_messages.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        .type-info {
+            background-color: #262626;
+            padding: 10px 15px;
+            border-left: 4px solid #00ff00;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #c0c0c0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <!-- Menu de navigation -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'debats_en_cours' %}">Débats en cours</a></li>
+                <li><a href="{% url 'debats_finis' %}">Débats finis</a></li>
+                <li><a href="{% url 'create_debat' %}">Créer mon débat</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Affichage des messages (erreurs, confirmations, etc.) -->
+    {% include 'app/messages_popup.html' %}
+            
+    <!-- Bande décorative -->
+    <div class="decorative-band">
+        <img src="{% static 'app/images/header.png' %}" alt="Bande décorative">
+    </div>
+
+    <!-- Titre de la section -->
+    <section class="presentation" id="presentation">
+        <div class="icon">
+            <img src="{% static 'app/images/pacman.png' %}" alt="Pacman Icon" />
+        </div>
+        <h2>CRÉER UN DÉBAT FLASH</h2>
+    </section>
+
+    <!-- Contenu principal - Formulaire de création de débat -->
+    <div class="content">
+        <form action="{% url 'save_debat_standard' %}" method="POST">
+            {% csrf_token %}
+            
+            <input 
+                type="text" 
+                name="titre" 
+                class="zone-texte" 
+                placeholder="Titre du débat..." 
+                required
+            >
+            
+            <textarea 
+                name="description" 
+                class="zone-texte2" 
+                placeholder="Description du débat..." 
+                required
+            ></textarea>
+            
+            <button type="submit" class="start-btn">Créer le débat</button>
+        </form>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+    </footer>
+</body>
+</html> 

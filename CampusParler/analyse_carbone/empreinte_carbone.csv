@@ -1,0 +1,13 @@
+fonctionnalite,url,emissions_CO2_g,iterations
+[PAGE] Accueil,/,2.0660657974704365e-06,10
+[PAGE] Liste des débats en cours,/debats_en_cours,2.1133729221039417e-06,10
+[PAGE] Liste des débats finis,/debats_finis,1.7618639843022407e-06,10
+[PAGE] Formulaire de création de débat,/create_debat,1.978397640602458e-06,10
+[PAGE] Formulaire d'inscription,/register,2.0082907928987527e-06,10
+[ACTION] Création de compte utilisateur,/register,2.16922288492807e-06,10
+[AUTH] Connexion utilisateur,/login,2.9319258180902858e-06,10
+[PAGE] Formulaire de débat standard,/create_debat_standard,2.0552575292193667e-06,10
+[ACTION] Création d'un débat standard,/save_debat_standard,2.1690975937453896e-06,10
+[PAGE] Formulaire de débat Kialo,/create_debat_kialo,2.013748910071544e-06,10
+[ACTION] Création d'un débat Kialo,/save_debat_kialo,2.4240591622847904e-06,10
+[AUTH] Déconnexion utilisateur,/logout,1.838319828363469e-06,10

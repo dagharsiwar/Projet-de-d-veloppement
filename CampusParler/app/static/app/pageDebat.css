@@ -1,0 +1,450 @@
+   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=HK+Modular&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+
+   html,body {
+       height: auto;               
+       min-height: 100vh; /* Garde au moins la hauteur de l'écran */
+       overflow-y: auto; /* Active le scroll vertical si nécessaire */
+       margin: 0;                  /* Supprime l'espace blanc par défaut autour de la page */
+       padding: 0;                  /* Supprime l'espace interne par défaut (à l'intérieur du body) */
+       display: flex;              /* Active Flexbox */
+       flex-direction: column;     /* Empile les éléments verticalement */
+       background-color: #d0ecfa;
+       color: black;             /* Couleur du texte par défaut (gris foncé) */
+       text-align: center;         /* Centre le texte par défaut horizontalement */
+       justify-content: center;
+   }
+   
+   .content {
+       flex: 1;               /* Le contenu principal prend tout l'espace disponible */
+       padding: 20px;         /* Un peu d'espace autour du contenu */
+   }
+   
+   
+   
+   /* En-tête (header) */
+   header {
+       background-color: #52B5E5;               /* Couleur de fond du header (bleu vif) */
+       display: flex;                           /* Active le modèle Flexbox pour gérer l'alignement */
+       flex-direction: column;                  /* Empile les éléments verticalement (en colonne) */
+       align-items: center;                     /* Centre les éléments horizontalement */
+       padding: 15px;                          /* Espace intérieur en haut et en bas du header */
+       gap: 15px;                              /* Espace entre chaque élément à l'intérieur du header */
+       position: relative;
+   }
+   .home-button {
+        position: absolute;
+        top: 10px;
+        right: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        background-color: #102970;
+        border-radius: 50%;
+        box-shadow: -2px 2px 0px 0px #ff00a8, 2px -2px 0px 0px #50efff;
+        text-decoration: none;
+    }
+
+    .home-button:active {
+        transform: translateY(3px);
+        box-shadow: -1px 1px 0px 0px #ff00a8, 1px -1px 0px 0px #50efff;
+    }
+
+    .home-button .icon {
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        color: #ffffff;
+        padding-bottom: 5px;
+    }
+   
+   
+   
+   .decorative-band {
+       margin: 0;
+       padding: 0;
+   }
+   
+   .decorative-band img {
+       width: 100%;        /* L'image couvre toute la largeur de l'écran */
+       height: auto;       /* Maintient les proportions */
+       display: block;     /* Évite les espaces blancs en dessous de l'image */
+       margin: 0;          /* Supprime les marges */
+       padding: 0;         /* Supprime les paddings */
+   }
+   
+   
+   /* Style pour le titre principal */
+   h1.glitch {
+       font-family: 'Bungee', sans-serif;  /* Police pour "Campus Parler" */
+       font-size: 30px;
+       color: #1C2668;
+       text-shadow: 
+           0px 3px 0 #ff00a8,      /* Ombre rose en bas à gauche */
+           3px -3px 0 #50efff;      /* Ombre bleue en haut à droite */
+       margin: 5px;
+       margin-top: 20px;
+       text-transform: uppercase; /* Met en majuscules si nécessaire */
+   }
+   
+   
+   nav ul {
+       list-style: none;
+       display: flex;
+       gap: 150px;
+       padding: 0;
+       margin: 0;
+   }
+   
+   nav a {
+       background: #1C2668; /* Boutons de navigation. */
+       color: white; /* Couleur du texte. */
+       padding: 15px 20px; /* Espace interne pour agrandir les boutons. */
+       border-radius: 50px; /* Forme ovale des boutons. Plus la valeur est élevée, plus le bouton est arrondi. */
+       text-decoration: none; /* Supprime le soulignement des liens. */
+       font-size: 15px; /* Taille du texte. */
+       font-weight: bold; /*Texte en gras */
+       font-family: 'Open Sans', sans-serif; 
+       box-shadow: 
+       -3px 3px 0px 0px #ff00a8,  /* Ombre rose en bas à gauche */
+       3px -3px 0px 0px #50efff;   /* Ombre bleue en haut à droite */
+       transition: transform 0.3s; /* Effet de transition lors du survol (hover). */
+       display: inline-block; /*Important pour que transform fonctionne */
+   }
+   
+   nav a:hover {
+       transform: scale(1.1); /* Agrandit légèrement le bouton quand on passe la souris dessus. */
+   }
+   
+   /* Section Présentation */
+   .debat-title {
+       background-color: #d0ecfa;
+       margin: 0;
+       padding: 0;
+       display: flex;
+       align-items: left;
+       justify-content: left;
+       gap: 15px;
+   
+   }
+   
+   .debat-title h2  {
+       font-size: 24px;             /* Taille du texte */
+       color: #1C2668;                /* Couleur principale du texte */
+       text-shadow: 
+           -1px 0px 0 #ff00a8,      /* Ombre rose en bas à gauche */
+           0px 2px 0 #50efff;      /* Ombre bleue en haut à droite */
+       font-weight: 150;           /* Texte en gras */
+       text-align: left;          /* Centrage du texte */
+       margin-top: 45px;
+       
+   }
+   .Question {
+    width: 80%;  /* Largeur du rectangle */
+    height: auto;  /* Hauteur du rectangle */
+    background-color: #52B5E5;  /* Couleur bleu clair */
+    margin: 20px auto;  /* Centré horizontalement avec un espace vertical */
+    border-radius: 30px;  /* Coins arrondis */
+}
+
+#debat-content{
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 28px;            /* Taille de la police pour la description */
+    color: #ffffff;                /* Couleur du texte */
+    display: flex;
+    justify-content: center;  /* Centre horizontalement */
+    align-items: center;      /* Centre verticalement */
+    line-height: 2;  
+}
+.content {
+    font-family: 'Open Sans', sans-serif; 
+    display: flex;
+    justify-content: space-around; /* Espace égal autour des éléments */
+    align-items: flex-start; 
+    width: 80%;                    /* Largeur du conteneur */
+    margin: 20px auto;
+    background-color: #52B5E5;
+    border-radius: 30px;
+    padding: 0; 
+}
+
+#pour {
+    position: relative;
+    left: 20px;                  /* Décale légèrement vers la droite */
+}
+
+#contre {
+    position: relative;
+    left: -20px;                 /* Décale légèrement vers la gauche */
+}
+/* 
+#pour h1, #contre h1 {
+    font-size: 12px;       Taille du texte 
+    line-height: 1.2;      Hauteur de ligne pour éviter l'espacement excessif 
+    margin: 0;
+    padding: 0;
+}
+*/
+
+/* Affichage du score du débat */
+.barre-container {
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.label-droite{
+    font-size: 1.5em;
+    color: #102970;
+    white-space: nowrap;
+    text-shadow: 3px 3px 3px #ff00a8;
+}
+
+.label-gauche{
+    font-size: 1.5em;
+    color: #102970;
+    white-space: nowrap;
+    text-shadow: 3px 3px 3px  #50efff;
+}
+
+.barre {
+    flex-grow: 1;
+    height: 50px;
+    background-color: #ff00a8;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px 1px #102970;
+    position: relative;
+    border-style:solid;
+    border-color: #102970;
+    border-width: 3px;
+
+}
+
+.remplie{
+    height: 100%;
+    background-color: #50efff;
+    transition: width 0.3s ease-in-out;
+}
+
+
+.arguments-pour, .arguments-contre {
+    width: 45%;
+}
+
+.arguments-pour h2, .arguments-contre h2{
+    color:white;
+    text-shadow: 
+           -2px 0px 0 #50efff,      /* Ombre rose en bas à gauche */
+           0px 1px 0 #ff00a8; 
+}
+
+.argument, .reponse {
+    border: 2px solid;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+
+    word-wrap: break-word; /* Permet de couper les mots longs et éviter qu'ils ne dépassent */
+    overflow-wrap: break-word; /* Alternative pour assurer la coupure */
+    max-width: 100%; /* Empêche l'élément de dépasser sa largeur */
+    white-space: normal; /* Permet au texte de passer à la ligne si nécessaire */
+
+}
+
+.argument.pour {
+    border-color: #50efff;
+    border-width: 3px ;
+    background: #1C2668;
+    color: white; ;
+}
+
+.argument.contre {
+    border-color: #ff00a8;
+    border-width: 3px ;
+    background: #1C2668;
+    color: white; ;
+}
+
+.argument.pour h3 , .argument.contre h3{
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: bold;
+    font-style: normal;
+    font-size: 22px;
+}
+.argument.pour #corps  , .argument.contre #corps{
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: 400;
+    font-style: normal;
+    font-size: 19px;
+    text-align: left;
+    padding-left: 5%;
+}
+
+.argument.pour #score  , .argument.contre #score{
+    font-family: 'Bungee', sans-serif;
+    text-align: right;
+    padding-right: 15px;
+    
+}
+.arguments-contre #supp{
+    font-family: 'Open Sans', sans-serif; 
+    text-shadow: 
+           1px 1px 0 #ff00a8;
+}
+
+.arguments-contre #att{
+    font-family: 'Open Sans', sans-serif; 
+    text-shadow: 
+           1px 1px 0 #50efff;
+}
+
+.arguments-pour #supp{
+    font-family: 'Open Sans', sans-serif; 
+    text-shadow: 
+           1px 1px 0 #50efff;
+}
+
+.arguments-pour #att{
+    font-family: 'Open Sans', sans-serif; 
+    text-shadow: 
+           1px 1px 0 #ff00a8;
+}
+
+.reponse.pour {
+    border-color: #50efff;
+    border-width: 1px;
+    margin-left: 20px;
+    box-shadow: 1px 1px 1px 1px #50efff;
+}
+
+.reponse.contre {
+    border-color: #ff00a8;
+    border-width: 1px;
+    margin-left: 20px;
+    box-shadow: 1px 2px 1px 1px #ff00a8;
+}
+
+
+.reponse.pour #auteur , .reponse.contre #auteur {
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: 400;
+    font-size: 15px;
+}
+
+
+.reponse.pour #corps , .reponse.contre #corps {
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    text-align: left;
+}
+
+.reponse.pour #score , .reponse.contre #score {
+    font-family: 'Bungee', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 1px;
+    text-align: right;
+}
+
+
+
+/* BOUTONS DE VOTE */
+
+.vote-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+   }
+   
+   .vote-buttons form {
+    margin: 0;
+    display: flex;
+    gap: 15px;
+   }
+   
+   .like-button, .dislike-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+   }
+   
+   .like-button {
+    background-color: #50efff;
+    color: #1C2668;
+    box-shadow: -2px 2px 0 #ff00a8;
+   }
+   
+   .dislike-button {
+    background-color: #ff00a8;
+    color: white;
+    box-shadow: 2px -2px 0 #50efff;
+   }
+   
+   .like-button:hover, .dislike-button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+   }
+   
+   .like-button:active, .dislike-button:active {
+    transform: translateY(1px);
+    box-shadow: none;
+   }
+   
+   /* Style spécifique pour les votes dans les arguments */
+   .argument .like-button, 
+   .argument .dislike-button {
+    font-size: 12px;
+    padding: 10px 20px;
+   }
+   
+   /* Style spécifique pour les votes dans les réponses */
+   .reponse .like-button, 
+   .reponse .dislike-button {
+    font-size: 8px;
+    padding: 5px 10px;
+   }
+   
+   /* Icônes (optionnel) */
+   .like-button::before {
+    content: "↑";
+   }
+   
+   .dislike-button::before {
+    content: "↓";
+   }
+
+
+   /* Pied de page */
+   footer {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #1C2668;
+    color: white;
+    padding: 3px;
+    margin-top: auto;
+    width: 100%;
+    font-size: 12px;
+    text-align: center; 
+    }

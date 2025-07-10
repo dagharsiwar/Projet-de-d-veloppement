@@ -1,0 +1,14 @@
+<!-- voir docs/liens_utiles si besoin-->
+
+{% if messages %} <!-- premirement on vérifie si des messages sont disponibles dans la variable messages -->
+<div class="popup-messages"> <!-- conteneur principal pour tous les messages popup -->
+    {% for message in messages %} <!-- si plusieurs msg boucle sur chaque message disponible -->
+    <div class="popup-message {% if message.tags %}{{ message.tags }}{% endif %}"> <!-- Crée une div pour chaque message avec sa classe de type (success, error,...) -->
+        <div class="popup-content"> <!-- Contenu du message cad le message et la barre de progression -->
+            <span class="popup-text">{{ message }}</span> <!-- texte du message -->
+            <div class="popup-progress-bar"></div> <!-- Barre de progression -->  
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

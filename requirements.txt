@@ -1,0 +1,6 @@
+asgiref==3.8.1
+Django==5.1.6
+sqlparse==0.5.3
+codecarbon==2.3.4
+pandas==2.2.1
+setuptools>=67.0.0

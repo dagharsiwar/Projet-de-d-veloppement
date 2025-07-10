@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Parler - Débats Étudiants</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/presentation.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/popup_messages.css' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <div class="top-bar">
+            <div class="login">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">
+                        <button>Déconnexion</button>
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}">
+                        <button>S'identifier</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Titre principal tout en haut -->
+        <h1 class="glitch" data-text="Campus Parler">Campus Parler</h1>
+
+        <!-- Slogan en haut -->
+        <h2 class="slogan">DÉBATEZ !</h2>
+
+        <!-- Menu de navigation en dessous du slogan -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'debats_en_cours' %}">Débats en cours</a></li>
+                <li><a href="{% url 'debats_finis' %}">Débats finis</a></li>
+                <li><a href="{% url 'create_debat' %}">Créer mon débat</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    {% include 'app/messages_popup.html' %}
+            
+    <!-- Bande décorative -->
+    <div class="decorative-band">
+        <img src="{% static 'app/images/header.png' %}" alt="Bande décorative">
+    </div>
+    <!-- Section Accueil -->
+    <section class="presentation" id="presentation">
+        <div class="icon">
+            <img src="{% static 'app/images/pacman.png' %}" alt="Pacman Icon" />
+        </div>
+        <h2>PRéSENTATION</h2>
+    </section>
+    <div class="content">
+        <!-- Présentation du site (accueil) -->
+        <div class="video-container">
+            <video controls>
+                <source src="{% static 'app/videos/video_presentation.mp4' %}" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+        </div>
+
+
+    </div>
+    
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

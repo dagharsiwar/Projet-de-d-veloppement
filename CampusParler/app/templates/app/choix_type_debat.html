@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Parler - Choisir un type de débat</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/create_debat.css' %}">
+    <link rel="stylesheet" href="{% static 'app/popup_messages.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        .debate-types {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            padding: 50px;
+            gap: 2em;
+        }
+        
+        .debate-type {
+            text-decoration: none;
+            color: white;
+            transition: all 0.5s ease;
+        }
+        
+        .debate-type-card {
+            height: 200px;
+            width: 350px;
+            background: #1C2668;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 
+                -3px 3px 0px 0px #ff00a8,  /* Ombre rose en bas à gauche */
+                3px -3px 0px 0px #50efff;  /* Ombre bleue en haut à droite */
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .debate-type-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                0deg, 
+                transparent, 
+                transparent 30%, 
+                #50f0ff9a
+            );
+            transform: rotate(-45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .debate-type-card:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                -5px 5px 3px 0px #ff00a8,  /* Ombre rose en bas à gauche */
+                5px -5px 3px 0px #50efff;  /* Ombre bleue en haut à droite */
+        }
+        
+        .debate-type-card:hover::before {
+            opacity: 1;
+            transform: rotate(-45deg) translateY(100%);
+        }
+        
+        .debate-type-card h3 {
+            margin-bottom: 15px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2em;
+            color: white;
+        }
+        
+        .debate-type-card p {
+            color: #d0ecfa;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        body {
+            background-color: #d0ecfa;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <!-- Menu de navigation -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'debats_en_cours' %}">Débats en cours</a></li>
+                <li><a href="{% url 'debats_finis' %}">Débats finis</a></li>
+                <li><a href="{% url 'create_debat' %}">Créer mon débat</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    {% include 'app/messages_popup.html' %}
+            
+    <!-- Bande décorative -->
+    <div class="decorative-band">
+        <img src="{% static 'app/images/header.png' %}" alt="Bande décorative">
+    </div>
+
+    <!-- Titre de la section -->
+    <section class="presentation" id="presentation">
+        <div class="icon">
+            <img src="{% static 'app/images/pacman.png' %}" alt="Pacman Icon" />
+        </div>
+        <h2>CHOISISSEZ UN TYPE DE DÉBAT</h2>
+    </section>
+
+    <!-- Contenu principal - Choix du type de débat -->
+    <div class="content">
+        <div class="debate-types">
+            <a href="{% url 'create_debat_standard' %}" class="debate-type">
+                <div class="debate-type-card">
+                    <h3>DÉBAT FLASH</h3>
+                    <p>Format simplifié avec des arguments pour et contre. Les réponses aux arguments ne sont pas reliées entre elles, permettant une discussion concise.</p>
+                </div>
+            </a>
+            
+            <a href="{% url 'create_debat_kialo' %}" class="debate-type">
+                <div class="debate-type-card">
+                    <h3>DÉBAT THINKTREE</h3>
+                    <p>Format hiérarchique avec des  arguments imbriqués. Structure en arbre permettant une discussion plus approfondie.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Campus Parler - Sorbonne Université. Tous droits réservés.</p>
+    </footer>
+</body>
+</html> 
